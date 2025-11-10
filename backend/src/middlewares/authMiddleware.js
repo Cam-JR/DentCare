@@ -16,17 +16,17 @@ export const verifyToken = (req, res, next) => {
   }
 };
 
-// Solo superadmin
 export const isSuperAdmin = (req, res, next) => {
-  if (req.user.rol !== 'superadmin')
+  if (req.user.rol !== 'superadmin') {
     return res.status(403).json({ message: 'Acceso denegado, solo superadmin' });
+  }
   next();
 };
 
-// Solo admin o superadmin
 export const isAdmin = (req, res, next) => {
-  if (req.user.rol !== 'admin' && req.user.rol !== 'superadmin')
+  if (req.user.rol !== 'admin' && req.user.rol !== 'superadmin') {
     return res.status(403).json({ message: 'Acceso denegado' });
+  }
   next();
 };
 
