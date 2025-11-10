@@ -1,0 +1,104 @@
+/* =============================== */
+/* 🔹 ESTILOS GENERALES DEL BODY */
+/* =============================== */
+body {
+  background-color: #f8fafc;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* =============================== */
+/* 🔹 ESTILO DE NAVEGACIÓN */
+/* =============================== */
+
+/* Enlace activo */
+.navbar .nav-link.active {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Hover de enlaces */
+.navbar .nav-link:hover {
+  color: #0056b3;
+}
+
+/* =============================== */
+/* 🔹 ESTILOS DE CARDS */
+/* =============================== */
+
+/* Contenedor de cards */
+#adminCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Card principal de administrador */
+.card-admin {
+  flex: 1 1 300px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efecto hover de la card */
+.card-admin:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card body */
+.card-admin .card-body {
+  padding: 1.2rem 1.4rem;
+}
+
+/* Título de card (nombre y apellido) */
+.card-admin h5 {
+  margin-bottom: 0.3rem;
+  color: #007bff;
+}
+
+/* Especialidad debajo del nombre */
+.card-admin .especialidad {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+/* Texto de card */
+.card-admin p {
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Contenedor de acciones (botones) */
+.card-admin .acciones {
+  display: flex;
+  justify-content: end;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+  font-family: 'Poppins', sans-serif;
+}
+ 
+
+footer {
+  margin-top: auto;
+  padding: 2rem 0 !important;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}

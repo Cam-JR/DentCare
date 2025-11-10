@@ -1,0 +1,70 @@
+body {
+  background-color: #f8fafc;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar .nav-link.active {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.navbar .nav-link:hover {
+  color: #0056b3;
+}
+
+.btn-purple {
+  background-color: #6f42c1;
+  color: #fff;
+}
+
+.btn-purple:hover {
+  background-color: #5a34a5;
+}
+
+.text-purple {
+  color: #6f42c1;
+}
+
+/*  */
+
+#contenedorPacientes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card-paciente {
+  flex: 1 1 300px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.card-paciente:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card-paciente .card-body {
+  padding: 1.2rem 1.4rem;
+}
+
+.card-paciente h5 {
+  margin-bottom: 0.3rem;
+  color: #007bff;
+}
+
+.card-paciente p {
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.card-paciente .acciones {
+  display: flex;
+  justify-content: end;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}

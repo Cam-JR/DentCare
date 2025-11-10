@@ -1,18 +1,37 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <title>DentCare | Panel Superadministrador</title>
+
   <link rel="icon" type="image/svg+xml" href="/frontend/assets/icon/tooth.svg" />
+
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/frontend/assets/css/dashboard.css" />
+
+
+  <link rel="stylesheet" href="/frontend/assets/css/pacientes.css" />
+
+   
+
 </head>
 
 <body>
+
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
     <div class="container">
@@ -27,8 +46,8 @@
 
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav mb-2 mb-lg-0 fw-medium">
-          <li class="nav-item"><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="pacientes.html">Pacientes</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active" href="pacientes.html">Pacientes</a></li>
           <li class="nav-item"><a class="nav-link" href="administradores.html">Administradores</a></li>
           <li class="nav-item"><a class="nav-link" href="reportes.html">Reportes</a></li>
           <li class="nav-item"><a class="nav-link" href="registro-admin.html">Registro Admin</a></li>
@@ -37,102 +56,94 @@
 
       <div class="d-flex align-items-center">
         <span class="me-3 text-muted small">Bienvenido, <strong id="nombre-usuario">Superadmin</strong></span>
-        <button class="btn btn-outline-danger btn-sm" id="logoutBtn">
+        <button class="btn btn-outline-danger btn-sm" id="btnLogout">
           <i class="bi bi-box-arrow-right me-1"></i> Cerrar Sesión
         </button>
       </div>
     </div>
   </nav>
  
-    <!-- MAIN CONTENT -->
-  <!-- Pacientes -->
-<main class="container mt-5 pt-5">
+    <!-- MAIN CONTENT --> 
+  <main class="container mt-5 pt-5">
   <h2 class="fw-bold mb-1">Gestión de Pacientes</h2>
   <p class="text-muted mb-4">Visualiza, edita o elimina pacientes registrados</p>
 
-  <div class="card shadow-sm border-0" data-aos="fade-up">
-    <div class="card-body">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="fw-semibold mb-0"><i class="bi bi-people me-2 text-primary"></i>Pacientes</h5>
-        <button class="btn btn-outline-primary btn-sm" id="btnActualizar">
-          <i class="bi bi-arrow-clockwise me-1"></i>Actualizar
-        </button>
-      </div>
+  <!-- 🔄 Botón para actualizar -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-semibold mb-0"><i class="bi bi-people me-2 text-primary"></i>Pacientes Registrados</h5>
+    <button class="btn btn-outline-primary btn-sm" id="btnActualizar">
+      <i class="bi bi-arrow-clockwise me-1"></i>Actualizar
+    </button>
+  </div>
 
-      <div class="table-responsive">
-        <table class="table table-hover align-middle" id="tablaPacientes">
-          <thead class="table-light">
-            <tr>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Teléfono</th>
-              <th>Fecha Registro</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+  <!-- 🔍 Filtro por DNI -->
+<div class="input-group mb-4 w-50">
+  <span class="input-group-text"><i class="bi bi-search"></i></span>
+  <input
+    type="text"
+    id="filtroDni"
+    class="form-control"
+    placeholder="Buscar paciente por DNI..."
+  />
+  <button class="btn btn-outline-primary" id="btnBuscarDni">Buscar</button>
+  <button class="btn btn-outline-secondary" id="btnLimpiarFiltro">Limpiar</button>
+</div>
+
+  <!-- 🧩 Contenedor de Cards -->
+  <div id="contenedorPacientes" class="row g-3"></div>
+
+  <!-- 📝 Formulario de Edición -->
+  <div class="card shadow-sm border-0 mt-5" id="formEditarPaciente" style="display:none;">
+    <div class="card-body">
+      <h5 class="fw-semibold mb-3 text-primary">
+        <i class="bi bi-pencil-square me-2"></i>Editar Paciente
+      </h5>
+      <form id="editarPacienteForm">
+        <div class="row g-3">
+          <input type="hidden" id="pacienteId" />
+          <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">DNI</label>
+            <input type="text" class="form-control" id="dni">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefono">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Correo</label>
+            <input type="email" class="form-control" id="correo">
+          </div>
+        </div>
+        <div class="mt-4 text-end">
+          <button type="button" class="btn btn-secondary me-2" id="cancelarEdicion">Cancelar</button>
+          <button type="submit" class="btn btn-success">Guardar Cambios</button>
+        </div>
+      </form>
     </div>
   </div>
 </main>
 
-<!-- FOOTER -->
+
+
+  <!-- FOOTER -->
   <footer class="text-center text-muted py-3">
     © 2025 DentCare – Sistema de Gestión Dental
   </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", async () => {
-  const tabla = document.querySelector("#tablaPacientes tbody");
-
-  async function cargarPacientes() {
-    tabla.innerHTML = "<tr><td colspan='5' class='text-center text-muted'>Cargando...</td></tr>";
-
-    const token = localStorage.getItem("token");
-
-    const res = await fetch("http://localhost:4000/api/superadmin/pacientes", {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    const data = await res.json();
-    tabla.innerHTML = "";
-
-    data.forEach(p => {
-      tabla.innerHTML += `
-        <tr>
-          <td>${p.nombre}</td>
-          <td>${p.correo}</td>
-          <td>${p.telefono || '-'}</td>
-          <td>${new Date(p.fechaRegistro).toLocaleDateString()}</td>
-          <td>
-            <button class="btn btn-warning btn-sm me-1" onclick="editarPaciente('${p._id}')">
-              <i class="bi bi-pencil"></i>
-            </button>
-            <button class="btn btn-danger btn-sm" onclick="eliminarPaciente('${p._id}')">
-              <i class="bi bi-trash"></i>
-            </button>
-          </td>
-        </tr>
-      `;
-    });
-  }
-
-  window.eliminarPaciente = async (id) => {
-    if (!confirm("¿Deseas eliminar este paciente?")) return;
-    const token = localStorage.getItem("token");
-    await fetch(`http://localhost:4000/api/superadmin/pacientes/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    cargarPacientes();
-  };
-
-  document.querySelector("#btnActualizar").addEventListener("click", cargarPacientes);
-  cargarPacientes();
-});
-</script>
-
-    
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+  </script>
+  <script src="./js/paciente.js"></script>  
 </body>
 </html>
