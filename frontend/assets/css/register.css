@@ -1,0 +1,331 @@
+/* Estilos Base y Layout (Reemplazo de Tailwind) */
+:root {
+    --primary-color: #0A74DA;
+    --text-color: #FFFFFF;
+    --background-light: #F9FAFB;
+    --terms-color: #03426D; /* NUEVO: Color para el enlace y checkbox de términos */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;      
+    min-height: 100vh;      
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-light); /* Fallback */
+    position: relative;      
+}
+
+    /* Estilo del Fondo con Imagen y Overlay (Manteniendo la funcionalidad visual) */
+    .background-container {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+    
+    .background-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        z-index: 1;
+    }
+    
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.227); /* Oscurece la imagen */
+        z-index: 2;
+    }
+
+    /* Contenedor Principal y Formulario */
+    .main-content {
+        position: relative;
+        z-index: 80;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 100vh;
+        padding: 3rem 1rem;
+    }
+
+    .card {
+        max-width: 700px;
+        width: 100%;
+        /* Hacemos el formulario Transparente con un poco de desenfoque */
+        background-color: rgba(254, 254, 254, 0.196); 
+        backdrop-filter: blur(2px);
+        border-radius: 0.75rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+    }
+
+    /* Estilos de Tipografía y Elementos de Formulario */
+    .header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .logo-text {
+        color: var(--text-color);
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    .title {
+        color: var(--text-color);
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    .subtitle {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
+        position: relative;
+    }
+
+    .input-group {
+        position:relative;
+    }
+    
+    .input-icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #57595A;
+        font-size: 1.25rem;
+    }
+
+    .input-field {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.5rem; /* Ajuste para el icono */
+        border-radius: 0.5rem;
+        background-color: rgba(217, 217, 217, 0.268); /* Fondo del input transparente */
+        border: 1px solid #57595A;
+        color: var(--text-color);
+        transition: border-color 0.2s, background-color 0.2s;
+    }
+    
+    .input-field::placeholder {
+        color: #363939;
+    }
+
+    .input-field:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .submit-btn {
+        width: 100%;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+        background-color: #0060b8; /* Un poco más oscuro */
+    }
+    
+    .submit-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    /* Mensajes de Estado */
+    .message {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+        display: none;
+    }
+    .message.error {
+        background-color: rgba(255, 0, 0, 0.1);
+        border: 1px solid rgba(255, 0, 0, 0.5);
+        color: #ffcccc;
+    }
+    .message.success {
+        background-color: rgba(0, 255, 0, 0.1);
+        border: 1px solid rgba(0, 255, 0, 0.5);
+        color: #ccffcc;
+    }
+    .message.loading {
+        background-color: rgba(0, 0, 255, 0.1);
+        border: 1px solid rgba(0, 0, 255, 0.5);
+        color: #ccccff;
+    }
+
+    /* Enlaces */
+    .link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .link:hover {
+        text-decoration: underline;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .text-white {
+        color: var(--text-color);
+    }
+
+    /* Utilidades (Mantenidas de Tailwind) */
+    .hidden { display: none; }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .space-x-2 > * + * { margin-left: 0.5rem; }
+    .mr-2 { margin-right: 0.5rem; }
+    /* Añadimos mr-1 para el icono pequeño */
+    .mr-1 { margin-right: 0.25rem; } 
+    .mb-4 { margin-bottom: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    
+    /* VALIDACIÓN DE CONTRASEÑA */
+    .password-info {
+        margin-top: 0.5rem;
+        /* Quitamos el font-size y color de aquí para aplicarlo al .validation-row */
+    }
+    
+    /* NUEVO: Contenedor para alinear requisitos lateralmente */
+    .validation-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 0.25rem; /* Separación de la barra de progreso */
+    }
+
+    .progress-bar-container {
+        width: 100%;
+        height: 8px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        overflow: hidden;
+        /* Eliminamos el margen superior de 0.5rem para usarlo en el .validation-row */
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0;
+        background-color: var(--primary-color);
+        transition: width 0.3s ease-in-out, background-color 0.3s;
+    }
+    
+    .progress-bar.complete {
+        background-color: #00cc66; /* Verde cuando está completo */
+    }
+    
+    .validation-item.invalid {
+        /* Se mantiene el color blanco que ya tenías, asumo que es para el texto */
+        color: #FFFFFF; 
+    }
+    
+    .validation-item.valid {
+        color: #00cc66; /* Verde */
+    }
+    
+    /* Layout para campos en una fila */
+    .form-row {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    .form-row > div {
+        flex: 1;
+    }
+    
+    /* Animación de carga */
+    .loading {
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    
+    /* NUEVOS ESTILOS PARA TÉRMINOS Y CONDICIONES */
+    .terms-group {
+        display: flex;
+        align-items: center;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .custom-checkbox {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .checkmark {
+        height: 1.25rem;
+        width: 1.25rem;
+        min-width: 1.25rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        border-radius: 50%; /* Forma circular */
+        margin-right: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+    
+    .checkmark:after {
+        content: "";
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        background: var(--terms-color);
+        display: none;
+    }
+
+    /* Cuando el checkbox está checked */
+    .custom-checkbox:checked ~ .checkmark {
+        background-color: var(--terms-color); /* Fondo del círculo #03426D */
+        border-color: var(--terms-color);
+    }
+
+    .custom-checkbox:checked ~ .checkmark:after {
+        display: block; 
+        background: var(--text-color); /* Círculo interior blanco para contraste */
+    }
+    
+    .terms-text {
+        color: var(--text-color);
+        font-size: 0.875rem;
+    }
+
+    .terms-link {
+        color: var(--terms-color); /* Color #03426D */
+        font-weight: 600;
+        text-decoration: none;
+        margin-left: 0.25rem;
+    }
+    .terms-link:hover {
+        text-decoration: underline;
+    }

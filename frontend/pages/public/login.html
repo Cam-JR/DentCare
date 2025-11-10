@@ -1,0 +1,246 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="icon" type="image/svg+xml" href="/frontend/assets/icon/tooth.svg">
+    <title>DistriCampo - Iniciar Sesión</title>
+
+
+    <!-- Bootstrap CSS -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"   
+        rel="stylesheet"
+    />
+    
+    <!-- Bootstrap Icons -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+        rel="stylesheet" 
+    />
+  
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+
+    <!-- Google Fonts: Material Symbols and Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+     
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/frontend/assets/css/login.css" />
+</head>
+<body>
+
+    <!-- HERO-->
+    <div class="background-container">
+        <img alt="Fondo de DistriCampo" class="background-image" src="/frontend/assets/img/background-login.png"/>
+        <div class="overlay"></div>
+    </div>
+
+    <!-- FORMULARIO -->
+    <div class="main-content">
+        <div class="card">
+            <div class="header">
+                <div class="flex items-center justify-center space-x-2 mb-3"> 
+                    <img src="/frontend/assets/icon/footer.svg" alt="">
+                </div>
+                <h2 class="title">Iniciar Sesión</h2>
+                <p class="subtitle">Accede a tu cuenta para gestionar tus citas</p>
+            </div>
+
+            <div id="successMessage" class="message success hidden">
+                <div class="flex items-center">
+                    <span class="material-symbols-outlined mr-2">check_circle</span>
+                    <span id="successText">Registro exitoso</span>
+                </div>
+            </div>
+            <div id="errorMessage" class="message error hidden">
+                <div class="flex items-center">
+                    <span class="material-symbols-outlined mr-2">error</span>
+                    <span id="errorText">Error al registrar</span>
+                </div>
+            </div>
+            <div id="loadingMessage" class="message loading hidden">
+                <div class="flex items-center">
+                    <span class="loading material-symbols-outlined mr-2">refresh</span>
+                    <span>Registrando usuario...</span>
+                </div>
+            </div>
+
+            <form id="registerForm">  
+                 
+
+                <div class="form-group">
+                    <label for="correoElectronico" class="label">Correo Electrónico*</label>
+                    <div class="input-group">
+                        <span class="material-symbols-outlined input-icon">mail</span>
+                        <input type="email" id="correoElectronico" name="correoElectronico" required class="input-field" placeholder="tu@email.com">
+                    </div>
+                </div> 
+
+                <div class="form-group">
+                    <label for="contrasena" class="label">Contraseña*</label>
+                    <div class="input-group">
+                        <span class="material-symbols-outlined input-icon">lock</span>
+                        <input type="password" id="contrasena" name="contrasena" required class="input-field" placeholder="Mínimo 6 caracteres">
+                    </div>
+                     
+                </div> 
+                <br>
+
+                <button type="submit" id="submitBtn" class="submit-btn">
+                    <span id="submitText">Iniciar Sesión</span>
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-white">
+                    ¿No tienes una cuenta? 
+                    <a href="register.html" class="link">Registrate aquí</a>
+                </p>
+            </div>
+
+            <div class="text-center mt-6">
+                <a href="index.html" class="link text-white">
+                    <span class="material-symbols-outlined" style="vertical-align: middle;">arrow_back</span>
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Para el formulario de INICIO DE SESIÓN, solo necesitamos Correo y Contraseña
+    const correoElectronico = document.getElementById('correoElectronico');
+    const contrasena = document.getElementById('contrasena');
+    const loginForm = document.getElementById('registerForm'); // Usando el ID que ya tenías
+    const submitBtn = document.getElementById('submitBtn');
+
+    // ------------------------------------
+    // 1. Lógica de habilitación del botón
+    // ------------------------------------
+
+    function checkInputs() {
+        const email = correoElectronico.value.trim();
+        const password = contrasena.value.trim();
+        
+        // Habilitar el botón si ambos campos tienen contenido
+        submitBtn.disabled = !(email.length > 0 && password.length > 0);
+    }
+
+    // Escuchar los eventos de escritura
+    correoElectronico.addEventListener('input', checkInputs);
+    contrasena.addEventListener('input', checkInputs);
+
+    // ------------------------------------
+    // 2. Lógica de Envío de Formulario (Simulada)
+    // ------------------------------------
+
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        hideMessages();
+
+        const email = correoElectronico.value.trim();
+        const password = contrasena.value.trim();
+
+        if (!email || !password) {
+            showError('Por favor introduce tu correo y contraseña.');
+            return;
+        }
+
+        setSubmitLoading(true, 'Iniciando sesión...');
+
+        try {
+            const res = await fetch("http://localhost:4000/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    correo: email,
+                    contrasena: password
+                }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                showError(data.message || "Credenciales inválidas");
+                setSubmitLoading(false);
+                return;
+            }
+
+            // Guardar token y rol
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("rol", data.rol);
+
+            showSuccess("¡Inicio de sesión exitoso!");
+            setSubmitLoading(false);
+
+            // Redirigir según rol
+            setTimeout(() => {
+                if (data.rol === "superadmin") window.location.href = "/frontend/pages/superadmin/dashboard.html";
+                else if (data.rol === "admin") window.location.href = "/frontend/pages/admin/dashboard.html";
+                else window.location.href = "/frontend/pages/paciente/dashboard.html";
+            }, 1500);
+        } catch (error) {
+            console.error(error);
+            showError("Error en el servidor. Intenta más tarde.");
+            setSubmitLoading(false);
+        }
+
+        
+        setTimeout(() => {
+            // window.location.href = '/dashboard'; // Redireccionar después de login
+        }, 2000);
+    });
+
+    // ------------------------------------
+    // 3. Funciones de Utilidad
+    // ------------------------------------
+    function setSubmitLoading(loading, text = 'Iniciar Sesión') {
+        const submitText = document.getElementById('submitText');
+        
+        if (loading) {
+            submitBtn.disabled = true;
+            submitText.innerHTML = `<span class="loading material-symbols-outlined" style="font-size: 1rem; vertical-align: middle;">refresh</span>${text}`;
+        } else {
+            // Restaurar el texto del botón y re-chequear la validación
+            submitText.textContent = 'Iniciar Sesión';
+            checkInputs(); 
+        }
+    }
+
+    function showSuccess(message) {
+        document.getElementById('successText').textContent = message;
+        document.getElementById('successMessage').style.display = 'flex';
+        document.getElementById('errorMessage').style.display = 'none';
+        document.getElementById('loadingMessage').style.display = 'none';
+    }
+
+    function showError(message) {
+        document.getElementById('errorText').textContent = message;
+        document.getElementById('errorMessage').style.display = 'flex';
+        document.getElementById('successMessage').style.display = 'none';
+        document.getElementById('loadingMessage').style.display = 'none';
+    }
+
+    function hideMessages() {
+        document.getElementById('successMessage').style.display = 'none';
+        document.getElementById('errorMessage').style.display = 'none';
+        document.getElementById('loadingMessage').style.display = 'none';
+    }
+    
+    // Inicializar el chequeo de inputs al cargar
+    checkInputs(); 
+});
+    </script>
+</body>
+</html>
