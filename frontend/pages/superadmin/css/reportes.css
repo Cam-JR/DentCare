@@ -1,0 +1,28 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  padding-top: 80px;
+}
+
+.chart-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.chart-card h5 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.table thead th {
+  background-color: #0d6efd !important;
+  color: white;
+  text-align: center;
+}
+
+.table tbody td {
+  vertical-align: middle;
+}
