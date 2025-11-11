@@ -11,16 +11,4 @@ body {
 .navbar .nav-link:hover {
   color: #0056b3;
 }
-
-.btn-purple {
-  background-color: #6f42c1;
-  color: #fff;
-}
-
-.btn-purple:hover {
-  background-color: #5a34a5;
-}
-
-.text-purple {
-  color: #6f42c1;
-}
+ 

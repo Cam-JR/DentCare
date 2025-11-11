@@ -1,0 +1,45 @@
+body {
+  background-color: #f8fafc;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar .nav-link.active {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.navbar .nav-link:hover {
+  color: #0056b3;
+}
+
+.btn-purple {
+  background-color: #6f42c1;
+  color: #fff;
+}
+
+.btn-purple:hover {
+  background-color: #5a34a5;
+}
+
+.text-purple {
+  color: #6f42c1;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+  font-family: 'Poppins', sans-serif;
+}
+
+footer {
+  margin-top: auto;
+  padding: 2rem 0 !important;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}

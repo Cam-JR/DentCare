@@ -6,9 +6,20 @@ form.addEventListener("submit", async (e) => {
 
   const nuevoAdmin = {
     nombre: form.nombre.value,
+    apellido: form.apellido.value,
+    dni: form.dni.value,
+    direccion: form.direccion.value,
+    telefono: form.telefono.value,
     correo: form.correo.value,
-    contrasena: form.contrasena.value,
+    id_especialidad: form.id_especialidad.value || null,
+    rol: form.rol.value,
+    contrasena: form.contrasena.value
   };
+
+  if (nuevoAdmin.contrasena.length < 6) {
+    alert("La contraseña debe tener al menos 6 caracteres");
+    return;
+  }
 
   try {
     const res = await fetch("http://localhost:4000/api/superadmin/crear-admin", {
